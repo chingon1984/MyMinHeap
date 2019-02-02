@@ -13,6 +13,16 @@ public class MyMinHeap {
         lastIndex = 0;
     }
 
+    public MyMinHeap(int maxSize, int inputArray[]) throws ArrayIndexOutOfBoundsException {
+        this(maxSize);
+
+        if (inputArray.length > maxSize)
+            throw new ArrayIndexOutOfBoundsException("Given Array is too big!");
+
+        for (int element : inputArray)
+            addToHeap(element);
+    }
+
 
     private int parent(int index) {
         return (index - 1) / 2;
@@ -32,9 +42,7 @@ public class MyMinHeap {
          * - put new element on last place
          * - heapify the element up*/
 
-        while (lastIndex >= maxSize) {
-            resizeArray();
-        }
+        resizeArray();
 
         int size = lastIndex++;
         heap[size] = element;
@@ -43,16 +51,17 @@ public class MyMinHeap {
     }
 
     private void resizeArray() {
-        int newMaxSize = 2 * maxSize;
-        int tempArray[] = new int[maxSize];
-        tempArray = heap;
-        heap = new int[newMaxSize];
+        while (lastIndex >= maxSize) {
+            int newMaxSize = 2 * maxSize;
+            int tempArray[] = new int[maxSize];
+            tempArray = heap;
+            heap = new int[newMaxSize];
 
-        for (int i = 0; i < maxSize; i++)
-            heap[i] = tempArray[i];
+            for (int i = 0; i < maxSize; i++)
+                heap[i] = tempArray[i];
 
-        maxSize = newMaxSize;
-
+            maxSize = newMaxSize;
+        }
     }
 
     private void heapifyUp(int index) {
@@ -81,14 +90,14 @@ public class MyMinHeap {
 
 
     public static void main(String[] args) {
-        MyMinHeap minheap = new MyMinHeap(1);
-        minheap.addToHeap(1);
-        minheap.addToHeap(3);
-        minheap.addToHeap(6);
-        minheap.addToHeap(5);
-        minheap.addToHeap(9);
-        minheap.addToHeap(8);
-        minheap.addToHeap(-2);
+        MyMinHeap minheap = new MyMinHeap(6, new int[]{4, 6, 3, 7});
+//        minheap.addToHeap(1);
+//        minheap.addToHeap(3);
+//        minheap.addToHeap(6);
+//        minheap.addToHeap(5);
+//        minheap.addToHeap(9);
+//        minheap.addToHeap(8);
+//        minheap.addToHeap(-2);
 
 
         minheap.printHeapArray();
