@@ -13,8 +13,8 @@ public class MyMinHeap {
         nextFreeIndex = 0;
     }
 
-    public MyMinHeap(int maxSize, int inputArray[]) throws ArrayIndexOutOfBoundsException {
-        this(maxSize);
+    public MyMinHeap(int inputArray[]) throws ArrayIndexOutOfBoundsException {
+        this(2 * inputArray.length);
 
         if (inputArray.length > maxSize)
             throw new ArrayIndexOutOfBoundsException("Given Array is too big!");
@@ -89,7 +89,7 @@ public class MyMinHeap {
 
     private void delete(int index) {
         if (index >= nextFreeIndex) {
-            System.out.println("\nDelete: Index is too large !!!");
+            System.out.println("\nDelete: Index " + index + " is too large. Maximum " + (nextFreeIndex-1) + " !!!");
             return;
         }
 
@@ -130,7 +130,7 @@ public class MyMinHeap {
 
 
     public static void main(String[] args) {
-        MyMinHeap minheap = new MyMinHeap(15, new int[]{1, 5, 6, 9, 11, 8, 15, 17, 21});
+        MyMinHeap minheap = new MyMinHeap(new int[]{1, 5, 6, 9, 11, 8, 15, 17, 21});
 //        minheap.addToHeap(1);
 //        minheap.addToHeap(3);
 //        minheap.addToHeap(6);
@@ -145,6 +145,6 @@ public class MyMinHeap {
         minheap.delete(0);
         minheap.delete(0);
         minheap.delete(0);
-        minheap.delete(3);
+        minheap.delete(6);
     }
 }
