@@ -14,7 +14,6 @@ public class MyMinHeap {
     }
 
 
-
     private int parent(int index) {
         return (index - 1) / 2;
     }
@@ -30,8 +29,12 @@ public class MyMinHeap {
 
     private void addToHeap(int element) {
         /*- get size of heap
-        * - put new element on last place
-        * - heapify the element up*/
+         * - put new element on last place
+         * - heapify the element up*/
+
+        while (lastIndex >= maxSize) {
+            resizeArray();
+        }
 
         int size = lastIndex++;
         heap[size] = element;
@@ -39,11 +42,24 @@ public class MyMinHeap {
 
     }
 
+    private void resizeArray() {
+        int newMaxSize = 2 * maxSize;
+        int tempArray[] = new int[maxSize];
+        tempArray = heap;
+        heap = new int[newMaxSize];
+
+        for (int i = 0; i < maxSize; i++)
+            heap[i] = tempArray[i];
+
+        maxSize = newMaxSize;
+
+    }
+
     private void heapifyUp(int index) {
         /*-compare child with parent starting at inde = end , while (child < parent)
-        *   -swap(child, parent)
-        *   -new index = index(parent)
-        * */
+         *   -swap(child, parent)
+         *   -new index = index(parent)
+         * */
         while (heap[index] < heap[parent(index)]) {
             swap(index, parent(index));
             index = parent(index);
@@ -59,13 +75,13 @@ public class MyMinHeap {
 
     private void printHeapArray() {
         System.out.println("Ordered Heap:");
-        for (int i=0; i<lastIndex; i++)
+        for (int i = 0; i < lastIndex; i++)
             System.out.print(heap[i] + " ");
     }
 
 
     public static void main(String[] args) {
-        MyMinHeap minheap = new MyMinHeap(15);
+        MyMinHeap minheap = new MyMinHeap(1);
         minheap.addToHeap(1);
         minheap.addToHeap(3);
         minheap.addToHeap(6);
@@ -73,7 +89,6 @@ public class MyMinHeap {
         minheap.addToHeap(9);
         minheap.addToHeap(8);
         minheap.addToHeap(-2);
-
 
 
         minheap.printHeapArray();
