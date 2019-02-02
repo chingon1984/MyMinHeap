@@ -13,8 +13,8 @@ public class MyMinHeap {
         nextFreeIndex = 0;
     }
 
-    public MyMinHeap(int maxSize, int inputArray[]) throws ArrayIndexOutOfBoundsException {
-        this(maxSize);
+    public MyMinHeap(int inputArray[]) throws ArrayIndexOutOfBoundsException {
+        this(2 * inputArray.length);
 
         if (inputArray.length > maxSize)
             throw new ArrayIndexOutOfBoundsException("Given Array is too big!");
@@ -130,7 +130,7 @@ public class MyMinHeap {
 
 
     public static void main(String[] args) {
-        MyMinHeap minheap = new MyMinHeap(15, new int[]{1, 5, 6, 9, 11, 8, 15, 17, 21});
+        MyMinHeap minheap = new MyMinHeap(new int[]{1, 5, 6, 9, 11, 8, 15, 17, 21});
 //        minheap.addToHeap(1);
 //        minheap.addToHeap(3);
 //        minheap.addToHeap(6);
