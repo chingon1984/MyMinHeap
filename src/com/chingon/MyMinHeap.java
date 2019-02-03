@@ -23,6 +23,10 @@ public class MyMinHeap {
             addToHeap(element);
     }
 
+    public int getRoot() {
+        return heap[0];
+    }
+
 
     private int parent(int index) {
         return (index - 1) / 2;
