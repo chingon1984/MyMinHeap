@@ -114,13 +114,17 @@ public class MyMinHeap {
             if(!leftChildAvailable(index))
                 return;
 
-            if(heap[index] > leftChild(index)) {
+            if(heap[index] > heap[leftChild(index)]) {
                 smallest = leftChild(index);
             }
 
             if(rightChildAvailable(index)) {
-                if(heap[smallest] > rightChild(index))
+                if(heap[smallest] > heap[rightChild(index)])
                     smallest = rightChild(index);
+            }
+
+            if(smallest == index) {
+                return;
             }
 
             swap(index, smallest);
