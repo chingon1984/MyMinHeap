@@ -109,26 +109,33 @@ public class MyMinHeap {
     }
 
     private void heapifyDown(int index) {
-        boolean again = true;
-        while (leftChildAvailable(index) && again) {
-
-            if (heap[index] > heap[leftChild(index)]) {
-                if (rightChildAvailable(index)) {
-                    if (heap[rightChild(index)] < heap[leftChild(index)]) {
-                        swap(index, rightChild(index));
-                        index = rightChild(index);
-                        continue;
-                    }
-                }
-                swap(index, leftChild(index));
-                index = leftChild(index);
-
-            } else if (rightChildAvailable(index) && heap[index] > heap[rightChild(index)]) {
-                swap(index, rightChild(index));
-                index = rightChild(index);
-            } else {
-                again = false;
+        while (true) {
+            if(!leftChildAvailable(index)) {
+                return;
             }
+
+            if(!rightChildAvailable(index)) {
+                if(heap[index] > heap[leftChild(index)]) {
+                    swap(index,leftChild(index));
+                }
+                return;
+            }
+
+            if(heap[rightChild(index)] < heap[leftChild(index)]) {
+                if(heap[index] > heap[rightChild(index)]) {
+                    swap(index, rightChild(index));
+                    index = rightChild(index);
+                    continue;
+                }
+                return;
+            }
+
+            if(heap[index] < heap[leftChild(index)]) {
+                return;
+            }
+
+            swap(index,leftChild(index));
+            index = leftChild(index);
         }
     }
 
@@ -149,6 +156,6 @@ public class MyMinHeap {
         minheap.delete(0);
         minheap.delete(0);
         minheap.delete(0);
-        minheap.delete(6);
+        minheap.delete(0);
     }
 }
