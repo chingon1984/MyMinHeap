@@ -23,6 +23,10 @@ public class MyMinHeap {
             addToHeap(element);
     }
 
+    public int getRoot() {
+        return heap[0];
+    }
+
 
     private int parent(int index) {
         return (index - 1) / 2;
@@ -45,7 +49,7 @@ public class MyMinHeap {
     }
 
 
-    private void addToHeap(int element) {
+    public void addToHeap(int element) {
         resizeArray();
 
         int size = nextFreeIndex++;
@@ -81,13 +85,13 @@ public class MyMinHeap {
         heap[elt1] = temp;
     }
 
-    private void printHeapArray() {
+    public void printHeapArray() {
         System.out.println("Ordered Heap:");
         for (int i = 0; i < nextFreeIndex; i++)
             System.out.print(heap[i] + " ");
     }
 
-    private void delete(int index) {
+    public void delete(int index) {
         if (index >= nextFreeIndex) {
             System.out.println("\nDelete: Index " + index + " is too large. Maximum " + (nextFreeIndex-1) + " !!!");
             return;
