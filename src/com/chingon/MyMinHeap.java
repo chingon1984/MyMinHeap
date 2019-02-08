@@ -109,33 +109,22 @@ public class MyMinHeap {
     }
 
     private void heapifyDown(int index) {
+        int smallest = index;
         while (true) {
-            if(!leftChildAvailable(index)) {
+            if(!leftChildAvailable(index))
                 return;
+
+            if(heap[index] > leftChild(index)) {
+                smallest = leftChild(index);
             }
 
-            if(!rightChildAvailable(index)) {
-                if(heap[index] > heap[leftChild(index)]) {
-                    swap(index,leftChild(index));
-                }
-                return;
+            if(rightChildAvailable(index)) {
+                if(heap[smallest] > rightChild(index))
+                    smallest = rightChild(index);
             }
 
-            if(heap[rightChild(index)] < heap[leftChild(index)]) {
-                if(heap[index] > heap[rightChild(index)]) {
-                    swap(index, rightChild(index));
-                    index = rightChild(index);
-                    continue;
-                }
-                return;
-            }
-
-            if(heap[index] < heap[leftChild(index)]) {
-                return;
-            }
-
-            swap(index,leftChild(index));
-            index = leftChild(index);
+            swap(index, smallest);
+            index = smallest;
         }
     }
 
